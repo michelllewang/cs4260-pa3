@@ -1,36 +1,10 @@
 """
     (a)
-    Group 4: Program 1
-    Team Members: Zhewen Tao, Michelle Wang, Joanna Yi, and Tanvi Hadgaonkar
+    Group 5: Program 3
+    Team Members: Michelle Wang, Joanna Yi, Neelasha Bhattacharjee, Ethan Jeong
 
 """
 
-"""
-    (b)
-    This code is about using an anytime, utility-driven search for round-trip road-trips. We used
-    a heuristic depth first search in order to incorporate the round-trip road-trips. This was written
-    in Python and can be pulled up on an IDE. The file "roundTripSearch.py" should be pulled up
-    and can ran on the terminal. The user can change the parameters, such as maximum time and speed in the main.
-    The first solution will pop up and the user can answer "yes" or "no" to receive more solutions for 
-    different paths. In order to run the code, "Edges.csv" and "Locations.csv" must be present in the same 
-    folder as the "roundTripSearch.py." After "no" is typed in, the results.txt will have the summary of the 
-    solution paths as well as the paths themselves.
-"""
-
-"""
-    (c) runtime or search strategy? 
-    The graph is able to calculate the preference for each edge and location. If a location or edge is
-    visited more than once, its preference will decrease by 20 percent. Therefore, for each road trip,
-    we can calculate its preference as its utility.
-
-    Since the program will return a roundtrip road trip, it seperates the search into two part: the exploration
-    part and the coming-back-home part. For the exploration part, the heuristic used is to calculate the sum of 
-    the direct distance of current location to its start distance and the preference, so the larger the value the
-    more preferable it is. Since the maximum time is known, when certain time has reached, the heuristic will be
-    changed to just the distance of current location to the start location, in which the smaller the value is the 
-    more preferable the road trip is, so that the user can go home quickly. 
-    
-"""
 
 
 import copy
@@ -485,12 +459,6 @@ if __name__ == '__main__':
     RoundTripRoadTrip('CharlotteNC', 'Locations.csv', 'Edges.csv', 100, 80, "results.txt")
 
 
-"""
-    (e)
-    Our test runs didn't correspond to any situations where no solution was possible. It's not guarenteed for our 
-    solution to decrease in value monotonically. However, it's value generally decreases before it finds another better 
-    path. All test runs lead to solutions met the hard the time constraints.
-"""
 
 """
     (f)
