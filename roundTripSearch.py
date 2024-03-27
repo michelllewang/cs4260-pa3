@@ -193,6 +193,11 @@ class RoadTrip:
         self.location_visits = {}  # Tracks the number of visits to each location
         self.edge_visits = {}  # Tracks the number of visits to each edge
 
+        # Initialize required and forbidden locations
+        self.required_locations = required_locations if required_locations is not None else []
+        self.forbidden_locations = forbidden_locations if forbidden_locations is not None else []
+
+
     def add_edge(self, edge):
         """
         Adds an edge to the graph.
@@ -303,8 +308,19 @@ class RoadTrip:
             f.write(f"start_from: {self.startLoc} | total_trip_preference: {total_trip_preference:.4f} | total_distance: {total_trip_distance:.0f} miles | total_trip_time: {total_trip_time:.2f} hours\n\n")
             count += 1
 
+    def is_valid(self, required_locations, forbidden_locations):
+        # Check if all required locations are visited
+        for loc in required_locations:
+            if loc not in self.location_visits:
+                return False
+        # Check if any forbidden location is visited
+        for loc in forbidden_locations:
+            if loc in self.location_visits:
+                return False
+        return True
 
-def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file):
+
+def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file, required_locations=[], forbidden_locations=[]):
     """
     Performs a round trip road trip search starting from a given location.
 
@@ -433,12 +449,14 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file)
                 # Sort array in descending order based on their preference
                 next_trips = []
                 for edge in surrounding_edges:
+                    if edge.location2.label in forbidden_locations:
+                        continue  # Skip forbidden locations
                     newRoadTrip = RoadTrip(current_road_trip.startLoc)
                     newRoadTrip.edges = current_road_trip.edges.copy()
                     newRoadTrip.location_visits = current_road_trip.location_visits.copy()
                     newRoadTrip.edge_visits = current_road_trip.edge_visits.copy()
                     newRoadTrip.add_edge(edge)
-                    if newRoadTrip.time_estimate(x_mph) < maxTime:
+                    if newRoadTrip.time_estimate(x_mph) < maxTime and newRoadTrip.is_valid(required_locations, forbidden_locations):
                         next_trips.append(newRoadTrip)
 
                 # Sort the stack based on heuristic
@@ -456,7 +474,22 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file)
 
 
 if __name__ == '__main__':
-    RoundTripRoadTrip('CharlotteNC', 'Locations.csv', 'Edges.csv', 100, 80, "results.txt")
+    startLoc = 'CharlotteNC'
+    LocFile = 'Locations.csv'
+    EdgeFile = 'Edges.csv'
+    maxTime = 100
+    x_mph = 80
+    results_file = "results.txt"
+
+    # Example user input handling for required and forbidden locations
+    # This could be more sophisticated depending on how you wish to format the inputs
+    required_input = input("Enter required locations (comma-separated, no spaces): ")
+    forbidden_input = input("Enter forbidden locations (comma-separated, no spaces): ")
+
+    required_locations = required_input.split(',') if required_input else []
+    forbidden_locations = forbidden_input.split(',') if forbidden_input else []
+
+    RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file, required_locations, forbidden_locations)
 
 
 
