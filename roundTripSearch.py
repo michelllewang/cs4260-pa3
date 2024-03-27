@@ -415,7 +415,6 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file,
                         continue
 
                     
-
                     f = open(results_file, "a")
                     current_road_trip.print_edges(x_mph, graph, results_file, maxTime, count)
                     f.close()
@@ -494,6 +493,9 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file,
                         key=lambda x: -graph.get_direct_distance(current_road_trip.startLoc, x.edges[-1].location2.label),
                         reverse=False)
                 stack.extend(next_trips)
+    
+        if not solutions:  # If the solutions list is empty
+            print("Error: No valid roadtrip could be found with the given constraints.")
 
 
     return
