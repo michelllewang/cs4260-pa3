@@ -1,5 +1,5 @@
 # CS 4260 Program 3
-Python program that generates round trip road trips based on utility values determined by a handcrafted regression tree. It also takes into account user inputs for required and forbidden locations.
+This is a python program that uses a heuristic depth-first search to generate round trip road trips based on utility values determined by a handcrafted regression tree. It also takes into account user inputs for required and forbidden locations.
 
 ## Repository Structure
 ```
@@ -16,5 +16,7 @@ cs4260-pa3/
 ├── LocationRegTree.py      # Builds regression tree for locations
 ├── EdgeRegTree.py          # Builds regression tree for edges
 │
-└── RoundTripRoadTrip.py    # Finds round trip road trips
+├── RoundTripRoadTrip.py    # Finds round trip road trips
+│
+└── results.txt             # Road trips and summary statistics are written here
 ```
