@@ -43,7 +43,6 @@ def predict_utility(element, node):
         return predict_utility(element, node.right_child)
 
 
-# Construct the simple regression tree
 def build_simple_tree():
     """
     Builds a location regression tree based on the presence of food, music, and nature.
@@ -70,7 +69,7 @@ def build_simple_tree():
 
     return root
 
-
+ 
 def build_simple_tree2():
     """
     Builds a location regression tree based on the presence of animals, sports, and cinema.

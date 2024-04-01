@@ -69,7 +69,7 @@ def build_simple_tree():
 
     return root
 
-
+  
 def build_simple_tree2():
     """
     Builds an edge regression tree based on the presence of animals, sports, and cinema.
@@ -108,6 +108,7 @@ def main():
     Return:
         None
     """
+
     # Load the decision tree model
     regression_tree_root = build_simple_tree()
 
@@ -119,7 +120,7 @@ def main():
             edges.append(row)
 
     # Predict utility for each location and update CSV file
-    with open('EdgeThemesUtil.csv', 'w', newline='') as output_file:
+    with open('EdgeThemesUtil_1.csv', 'w', newline='') as output_file:
         fieldnames = ['edgeLabel', 'locationA', 'locationB', 'actualDistance', 'Theme1', 'Theme2', 'Theme3', 'Utility',
                       'Contributer', 'Notes']
         csv_writer = csv.DictWriter(output_file, fieldnames=fieldnames)
@@ -131,8 +132,8 @@ def main():
                 "music": float(edge['Theme2']),
                 "nature": float(edge['Theme3'])
             }
-            predicted_utility = predict_utility(element, regression_tree_root)
-            edge['Utility'] = predicted_utility
+            predicted_utility1 = predict_utility(element, regression_tree_root_1)
+            edge['Utility'] = predicted_utility1
             csv_writer.writerow(edge)
 
 
