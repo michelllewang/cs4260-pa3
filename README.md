@@ -4,8 +4,14 @@ This is a python program that uses a heuristic depth-first search to generate ro
 ## Repository Structure
 ```
 cs4260-pa3/
-├── LocThemesUtil.csv       # CSV file containing locations, themes, and utilities
-├── EdgeThemesUtil.csv      # CSV file containing edges, themes, and utilities
+├── Locations.csv           # Original CSV file containing locations
+├── Edges.csv               # Original CSV file containing edges
+│
+├── LocThemes.csv           # CSV file containing locations and randomly generated themes
+├── EdgeThemes.csv          # CSV file containing edges and randomly generated themes
+│
+├── LocThemesUtil.csv       # CSV file containing locations, themes, and predicted utilities
+├── EdgeThemesUtil.csv      # CSV file containing edges, themes, and predicted utilities
 │
 ├── GenerateThemes.py       # Randomly generates themes for locations and edges
 │
