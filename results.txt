@@ -1,1 +1,24 @@
+Solution 1 | start_location: CharlotteNC | max_time: 10 | speed: 80
+1. CharlotteNC to AshevilleNC | label: AshevilleNC_tofrom_CharlotteNC_on_I40_and_US321 | edge_pref: 0.0000, edge_time: 1.62 hours, inter_loc_pref: 0.6000, inter_loc_time: 1.20 hours
+2. AshevilleNC to AugustaGA | label: AshevilleNC_tofrom_AugustaGA_on_I26_and_US121 | edge_pref: 0.0400, edge_time: 2.29 hours, inter_loc_pref: 0.8000, inter_loc_time: 1.60 hours
+3. AugustaGA to CharlotteNC | label: Charlotte_tofrom_Augusta | edge_pref: 0.0000, edge_time: 2.05 hours, inter_loc_pref: 0.4000, inter_loc_time: 0.80 hours
+start_from: CharlotteNC | total_trip_preference: 1.8400 | total_distance: 477 miles | total_trip_time: 9.56 hours
 
+Solution 2 | start_location: CharlotteNC | max_time: 10 | speed: 80
+1. CharlotteNC to AshevilleNC | label: AshevilleNC_tofrom_CharlotteNC_on_I40_and_US321 | edge_pref: 0.0000, edge_time: 1.62 hours, inter_loc_pref: 0.6000, inter_loc_time: 1.20 hours
+2. AshevilleNC to CharlotteNC | label: AshevilleNC_tofrom_CharlotteNC_on_I40_and_US321 | edge_pref: 0.0000, edge_time: 1.62 hours, inter_loc_pref: 0.4000, inter_loc_time: 0.80 hours
+start_from: CharlotteNC | total_trip_preference: 1.0000 | total_distance: 260 miles | total_trip_time: 5.25 hours
+
+Solution 3 | start_location: CharlotteNC | max_time: 10 | speed: 80
+1. CharlotteNC to AugustaGA | label: Charlotte_tofrom_Augusta | edge_pref: 0.0200, edge_time: 2.05 hours, inter_loc_pref: 0.8000, inter_loc_time: 1.60 hours
+2. AugustaGA to AshevilleNC | label: AshevilleNC_tofrom_AugustaGA_on_I26_and_US121 | edge_pref: 0.0000, edge_time: 2.29 hours, inter_loc_pref: 0.6000, inter_loc_time: 1.20 hours
+3. AshevilleNC to CharlotteNC | label: AshevilleNC_tofrom_CharlotteNC_on_I40_and_US321 | edge_pref: 0.0000, edge_time: 1.62 hours, inter_loc_pref: 0.4000, inter_loc_time: 0.80 hours
+start_from: CharlotteNC | total_trip_preference: 1.8200 | total_distance: 477 miles | total_trip_time: 9.56 hours
+
+
+Summary:
+Total Solutions: 3
+Average Instrumented Runtime: 3.9773617585500083 seconds
+Maximum TotalTripPreference: 1.8399999999999999
+Average TotalTripPreference: 1.5533333333333335
+Minimum TotalTripPreference: 1.0
