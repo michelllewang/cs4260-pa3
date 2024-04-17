@@ -2,7 +2,7 @@ from openai import OpenAI
 from RoundTripRoadTrip import RoadTrip
 from RoundTripRoadTrip import RoundTripRoadTrip
 
-
+OPENAI_KEY = "REPLACE THIS WITH YOUR OWN KEY TO RUN THE CODE."
 
 client = OpenAI(api_key=OPENAI_KEY)
 
