@@ -1,6 +1,8 @@
 # CS 4260 Program 3
 This is a python program that uses a heuristic depth-first search to generate round trip road trips based on utility values determined by a handcrafted regression tree. It also takes into account user inputs for required and forbidden locations.
 
+For Program 4, we added the GiveNarrative.py file, which contains a function that uses the OpenAI API to describe the attractions along a given road trip that the user may be interested in.
+
 ## Repository Structure
 ```
 cs4260-pa3/
