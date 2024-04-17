@@ -24,5 +24,7 @@ cs4260-pa3/
 │
 ├── RoundTripRoadTrip.py    # Finds round trip road trips
 │
+├── GiveNarrative.py        # Uses OpenAI API to provide a narrative for a given road trip
+│
 └── results.txt             # Road trips and summary statistics are written here
 ```
