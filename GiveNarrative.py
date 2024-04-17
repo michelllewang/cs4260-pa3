@@ -8,12 +8,22 @@ client = OpenAI(api_key=OPENAI_KEY)
 
 
 def give_narrative(road_trip):
+    """
+    Generates a description of the attractions that could be visited based on a given road trip.
 
-    locations = [road_trip.startLoc]
+    :param road_trip: RoadTrip object.
+    :return: None
+    """
 
+    locations = [road_trip.startLoc]  # Adds start location to list of locations
+
+    # Iterates through road trip edges and adds locations to existing list
     for edge in road_trip.edges:
         locations.append(edge.location2.label)
 
+    # Generates a message based on the locations list
+    # Since the regression tree was built on user preferences for food, music, and nature, those user preferences
+    # were incorporated into the message.
     message_content = (
         f"Give a description of the attractions that someone on a road trip from "
         f"{', '.join(locations)} may see in a paragraph form. "
@@ -21,6 +31,7 @@ def give_narrative(road_trip):
         f"The user prefers attractions related to food, music, and nature."
     )
 
+    # Uses the OpenAI Chat Completion model to generate a response from the API
     response = client.chat.completions.create(
         model="gpt-3.5-turbo-0125",
         max_tokens=1000,
@@ -30,9 +41,9 @@ def give_narrative(road_trip):
         ]
     )
 
-    api_response_content = response.choices[0].message.content
+    api_response_content = response.choices[0].message.content  # Stores the first text response returned by API
 
-    # Write the API response into the results file
+    # Writes the API response into the results.txt file
     with open(results_file, "a") as f:
         f.write(api_response_content + "\n")
 
