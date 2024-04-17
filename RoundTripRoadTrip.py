@@ -16,7 +16,7 @@ class RoadTrip:
         required_locations (dict): A dictionary of required locations.
         forbidden_locations (dict): A dictionary of forbidden locations.
     """
-    def __init__(self, startLoc):
+    def __init__(self, startLoc, required_locations=None, forbidden_locations=None):
         self.startLoc = startLoc
         self.edges = []  # List of edges in the road trip
         self.location_visits = {}
@@ -125,7 +125,7 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file,
     graph.location_preference_assignments(LocFile)
     graph.edge_preference_assignments(EdgeFile)
 
-    current_road_trip = RoadTrip(startLoc)
+    current_road_trip = RoadTrip(startLoc, required_locations=required_locations, forbidden_locations=forbidden_locations)
     max_distance = maxTime * x_mph
 
     stack = [current_road_trip]
@@ -154,7 +154,9 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file,
                 for edge in surrounding_edges:
                     # print(edge.location1.label, " to", edge.location2.label, " is being checked")
                     if edge.distance < max_distance:
-                        newRoadTrip = RoadTrip(startLoc=current_road_trip.startLoc)
+                        newRoadTrip = RoadTrip(startLoc=current_road_trip.startLoc,
+                                               required_locations=required_locations,
+                                               forbidden_locations=forbidden_locations)
                         newRoadTrip.add_edge(edge)
                         stack.append(newRoadTrip)
 
@@ -172,6 +174,7 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file,
                     current_road_trip.print_edges(x_mph, graph, results_file, maxTime, count)
                     f.close()
                     solutions.append(current_road_trip)
+                    return current_road_trip
 
                     end_time = time.time()
                     total_runtime += end_time - start_time
@@ -229,7 +232,8 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file,
                 for edge in surrounding_edges:
                     if edge.location2.label in forbidden_locations:
                         continue  # Skip forbidden locations
-                    newRoadTrip = RoadTrip(current_road_trip.startLoc)
+                    newRoadTrip = RoadTrip(current_road_trip.startLoc, required_locations=required_locations,
+                                           forbidden_locations=forbidden_locations)
                     newRoadTrip.edges = current_road_trip.edges.copy()
                     newRoadTrip.location_visits = current_road_trip.location_visits.copy()
                     newRoadTrip.edge_visits = current_road_trip.edge_visits.copy()
@@ -254,14 +258,14 @@ def RoundTripRoadTrip(startLoc, LocFile, EdgeFile, maxTime, x_mph, results_file,
         if not solutions:  # If the solutions list is empty
             print("Error: No valid road trip could be found with the given constraints.")
 
-    return
+    return solutions[0]
 
 
 if __name__ == '__main__':
-    startLoc = 'CharlotteNC'
+    startLoc = 'NewOrleansLA'
     LocFile = 'LocThemesUtil.csv'
     EdgeFile = 'EdgeThemesUtil.csv'
-    maxTime = 10
+    maxTime = 30
     x_mph = 80
     results_file = "results.txt"
 
